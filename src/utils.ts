@@ -8,10 +8,12 @@ export async function makeMap(k: KaboomCtx, name: string) {
 
     const spawnPoints: { [key: string]: { x: number, y: number } } = {};
 
-    for ( const layer of mapData.layers) {
+    for (const layer of mapData.layers) {
         if (layer.name === "colliders") {
-            for (const obj of layer.objects) {
-                spawnPoints[obj.name] = k.vec2(obj.x, obj.y);
+            for (const collider of layer.objects) {
+                map.add([k.area({
+                    shape: new k.Rect(k.vec2(0), collider.width, collider.height)
+                }), k.body(), k.pos(collider.x, collider.y), k.rect(collider.width, collider.height)]);
             }
         }
     }
