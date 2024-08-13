@@ -1,5 +1,21 @@
-import { GameObj, KaboomCtx } from "kaboom";
+import { AreaComp, BodyComp, DoubleJumpComp, GameObj, HealthComp, KaboomCtx, OpacityComp, PosComp, ScaleComp, SpriteComp } from "kaboom";
 import { scale } from "./constants";
+
+type PlayerGameObj = GameObj<
+    SpriteComp &
+    AreaComp &
+    BodyComp &
+    PosComp &
+    ScaleComp &
+    DoubleJumpComp &
+    HealthComp &
+    OpacityComp & {
+        speed: number;
+        direction: "left" | "right";
+        isInhaling: boolean;
+        isFull: boolean;
+    }
+>;
 
 export function makePlayer(k: KaboomCtx, posX: number, posy: number) {
     const player = k.add([
@@ -19,7 +35,7 @@ export function makePlayer(k: KaboomCtx, posX: number, posy: number) {
         },
         "player",
     ]);
-    
+
 
     player.onCollide("enemy", async (enemy: GameObj) => {
         if (player.isInhaling && enemy.isInhable) {
@@ -56,7 +72,7 @@ export function makePlayer(k: KaboomCtx, posX: number, posy: number) {
     });
 
     const inhaleEffect = k.add([
-        k.sprite("assets", { anim: "kirbInhaleEffect" }), 
+        k.sprite("assets", { anim: "kirbInhaleEffect" }),
         k.pos(),
         k.scale(scale),
         k.opacity(0),
@@ -88,4 +104,37 @@ export function makePlayer(k: KaboomCtx, posX: number, posy: number) {
     });
 
     return player;
+}
+
+
+export function setControls(k: KaboomCtx, player: GameObj) {
+    const inhaleEffectRef = k.get("inhaleEffect")[0];
+
+    k.onKeyDown((key) => {
+        switch (key) {
+            case "left":
+                player.direction = "left";
+                player.flipX = true;
+                player.move(-player.speed, 0);
+                break;
+            case "right":
+                player.direction = "right";
+                player.flipX = false;
+                player.move(player.speed, 0);
+                break;
+            case "z":
+                if (player.isFull) {
+                    player.play("kirbFull");
+                    inhaleEffectRef.opacity = 0;
+                    break;
+                }
+
+                player.isInhaling = true;
+                player.play("kirbInhaling");
+                inhaleEffectRef.opacity = 1;
+                break;
+            default:
+        }
+    })
+
 }

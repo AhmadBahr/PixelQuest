@@ -1,4 +1,4 @@
-import { makePlayer } from "./entities";
+import { makePlayer,setControls } from "./entities";
 import { k } from "./kaboomCtx";
 import { makeMap } from "./utils";
 
@@ -34,16 +34,15 @@ async function gameSetup() {
         ]);
         k.add(level1Layout);
 
-        // makePlayer likely already adds the player to the scene, so no need to add it again
+        // Make player and set controls
         const kirb = makePlayer(
             k,
             level1SpawnPoints.player[0].x,
             level1SpawnPoints.player[0].y
         );
+        setControls(k, kirb); // Assuming setControls is defined elsewhere
 
-        // Removing this redundant k.add(kirb) call
-        // k.add(kirb);
-
+        // Camera adjustments
         k.camScale(k.vec2(0.7, 0.7));
         k.onUpdate(() => {
             if (kirb.pos.x < level1Layout.pos.x + 432)
@@ -53,4 +52,5 @@ async function gameSetup() {
 
     k.go("level-1");
 }
+
 gameSetup();
