@@ -19,6 +19,7 @@ export function makePlayer(k: KaboomCtx, posX: number, posy: number) {
         },
         "player",
     ]);
+
     player.onCollide("enemy", async (enemy: GameObj) => {
         if (player.isInhaling && enemy.isInhable) {
             player.isInhaling = false;
@@ -26,5 +27,26 @@ export function makePlayer(k: KaboomCtx, posX: number, posy: number) {
             player.isFull = true;
             return;
         }
+        if (player.hp() === 0) {
+            k.destroy(player);
+            k.go("level-1");
+            return;
+        }
+
+        player.hurt();
+        await k.tween(
+            player.opacity,
+            0,
+            0.05,
+            (val) => (player.opacity = val),
+            k.easings.linear
+        );
+        await k.tween(
+            player.opacity,
+            1,
+            0.05,
+            (val) => (player.opacity = val),
+            k.easings.linear
+        );
     });
 }
