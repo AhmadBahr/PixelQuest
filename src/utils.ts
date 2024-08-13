@@ -40,7 +40,7 @@ export async function makeMap(k: KaboomCtx, name: string) {
                     }
                 ]
             }
-            continue;
         }
     }
+    return {map, spawnPoints}
 }
