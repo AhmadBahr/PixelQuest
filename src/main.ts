@@ -34,13 +34,21 @@ async function gameSetup() {
         ]);
         k.add(level1Layout);
 
+        // makePlayer likely already adds the player to the scene, so no need to add it again
         const kirb = makePlayer(
             k,
             level1SpawnPoints.player[0].x,
             level1SpawnPoints.player[0].y
         );
 
-        k.add(kirb);
+        // Removing this redundant k.add(kirb) call
+        // k.add(kirb);
+
+        k.camScale(k.vec2(0.7, 0.7));
+        k.onUpdate(() => {
+            if (kirb.pos.x < level1Layout.pos.x + 432)
+                k.camPos(kirb.pos.x + 500, 800);
+        });
     });
 
     k.go("level-1");

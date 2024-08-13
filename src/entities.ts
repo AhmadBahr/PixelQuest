@@ -2,7 +2,7 @@ import { GameObj, KaboomCtx } from "kaboom";
 import { scale } from "./constants";
 
 export function makePlayer(k: KaboomCtx, posX: number, posy: number) {
-    const player = k.make([
+    const player = k.add([
         k.sprite("assets", { anim: "kirbIdle" }),
         k.area({ shape: new k.Rect(k.vec2(4, 5.9), 284, 10) }),
         k.body(),
@@ -13,12 +13,13 @@ export function makePlayer(k: KaboomCtx, posX: number, posy: number) {
         k.opacity(1),
         {
             speed: 300,
-            direction: "right",
+            direction: "left",
             isInhaling: false,
-            isFull: false
+            isFull: false,
         },
         "player",
     ]);
+    
 
     player.onCollide("enemy", async (enemy: GameObj) => {
         if (player.isInhaling && enemy.isInhable) {
@@ -51,11 +52,11 @@ export function makePlayer(k: KaboomCtx, posX: number, posy: number) {
     });
 
     player.onCollide("exit", () => {
-        k.go("level-2");
+        k.go("level-1");
     });
 
     const inhaleEffect = k.add([
-        k.sprite("assets", { anim: "kirbInahleEffect" }),
+        k.sprite("assets", { anim: "kirbInhaleEffect" }), 
         k.pos(),
         k.scale(scale),
         k.opacity(0),
