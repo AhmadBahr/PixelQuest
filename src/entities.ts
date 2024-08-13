@@ -49,4 +49,24 @@ export function makePlayer(k: KaboomCtx, posX: number, posy: number) {
             k.easings.linear
         );
     });
+
+    player.onCollide("exit", () => {
+        k.go("level-2");
+    });
+
+    const inhaleEffect = k.add([
+        k.sprite("assets", { anim: "kirbInahleEffect" }),
+        k.pos(),
+        k.scale(scale),
+        k.opacity(0),
+        "inhaleEffect",
+    ]);
+
+    const inhaleZone = player.add([
+        k.area({ shape: new k.Rect(k.vec2(0), 20, 4) }),
+        k.pos(),
+        "inhaleZone",
+    ]);
+
+    inhaleZone 
 }
