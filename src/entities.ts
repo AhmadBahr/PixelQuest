@@ -194,14 +194,23 @@ export function makeFlameEnemy(k: KaboomCtx, posX: number, posY: number) {
         k.state("idle", ["idle", "jump"]),
         "enemy",
     ]);
-    flame.onStateEnter("idle", async()=>{
-        await k.wait(1, ()=>{
-            flame.play("jump");
-        });
-        flame.enterState("jump",async ()=>{
-            flame.jump(1000);
-        });
-        flame.onState
-    })
+
+    flame.onStateEnter("idle", async () => {
+        await k.wait(1);
+        flame.enterState("jump");
+    });
+
+    flame.onStateEnter("jump", () => {
+        flame.jump(1000);
+    });
+
+    flame.onStateUpdate("jump", () => {
+        if (flame.isGrounded()) {
+            flame.enterState("idle");
+        }
+    });
+
+    return flame;
 }
+
 
