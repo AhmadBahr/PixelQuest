@@ -272,6 +272,9 @@ export function makeBirdEnemy(
         }),
         k.body(),
         k.move(k.LEFT, speed),
+        k.offscreen({ destroy: true, distance: 400 }),
         "enemy",
     ]);
+    makeInhalable(k, bird);
+    return bird;
 }
