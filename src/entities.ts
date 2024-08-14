@@ -181,6 +181,17 @@ export function setControls(k: KaboomCtx, player: PlayerGameObj) {
 
 }
 
+export function makeInhalable(k: KaboomCtx, enemy:GameObj) {
+    return k.add([
+        k.sprite("assets", { frame: 0 }),
+        k.area({ shape: new k.Rect(k.vec2(0), 16, 16) }),
+        k.body({ isStatic: true }),
+        k.pos(posX * scale, posY * scale),
+        k.scale(scale),
+        "platform",
+    ]);
+}
+
 export function makeFlameEnemy(k: KaboomCtx, posX: number, posY: number) {
     const flame = k.add([
         k.sprite("assets", { anim: "flame" }),
