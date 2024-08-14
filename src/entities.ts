@@ -255,3 +255,23 @@ export function makeGuyEnemy(k: KaboomCtx, posX: number, posY: number) {
     ]);
     makeInhalable(k, guy);
 }
+
+export function makeBirdEnemy(
+    k: KaboomCtx,
+    posX: number,
+    posY: number,
+    speed: number
+) {
+    const bird = k.add([
+        k.sprite("assets", { anim: "bird" }),
+        k.scale(scale),
+        k.pos(posX * scale, posY * scale),
+        k.area({
+            shape: new k.Rect(k.vec2(2, 3.9), 12, 12),
+            collisionIgnore: ["enemy"],
+        }),
+        k.body(),
+        k.move(k.LEFT, speed),
+        "enemy",
+    ]);
+}

@@ -55,7 +55,11 @@ async function gameSetup() {
         }
     }
 
+    for(const guy of level1SpawnPoints.guy){
+        makeGuyEnemy(k, guy.x, guy.y);
+        }
+
     k.go("level-1");
-}
+});
 
 gameSetup();
