@@ -197,7 +197,7 @@ export function makeInhalable(k: KaboomCtx, enemy: GameObj) {
     const playerRef = k.get("player")[0];
     enemy.onUpdate(() => {
         if (playerRef.isInhaling && enemy.isInhable) {
-            if (playerRef.direction === "left") {
+            if (playerRef.direction === "right") {
                 enemy.move(-800, 0);
             } else {
                 enemy.move(800, 0);
@@ -219,6 +219,8 @@ export function makeInhalable(k: KaboomCtx, enemy: GameObj) {
             "enemy",
         ]);
 
+        makeInhalable(k,flame);
+
         flame.onStateEnter("idle", async () => {
             await k.wait(1);
             flame.enterState("jump");
@@ -233,8 +235,8 @@ export function makeInhalable(k: KaboomCtx, enemy: GameObj) {
                 flame.enterState("idle");
             }
         });
-
         return flame;
     }
+}
 
 
