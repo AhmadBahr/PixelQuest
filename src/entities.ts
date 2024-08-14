@@ -107,19 +107,19 @@ export function makePlayer(k: KaboomCtx, posX: number, posy: number) {
 }
 
 
-export function setControls(k: KaboomCtx, player: GameObj) {
+export function setControls(k: KaboomCtx, player: PlayerGameObj) {
     const inhaleEffectRef = k.get("inhaleEffect")[0];
 
     k.onKeyDown((key) => {
         switch (key) {
             case "left":
                 player.direction = "left";
-                player.flipX = true;
+                player.flipX(true);
                 player.move(-player.speed, 0);
                 break;
             case "right":
                 player.direction = "right";
-                player.flipX = false;
+                player.flipX(false);
                 player.move(player.speed, 0);
                 break;
             case "z":
@@ -135,6 +135,44 @@ export function setControls(k: KaboomCtx, player: GameObj) {
                 break;
             default:
         }
-    })
+    });
 
+    k.onKeyPress((key) => {
+        switch (key) {
+            case "x":
+                player.doubleJump();
+                break;
+            default:
+        }
+    });
+
+    k.onKeyRelease((key) => {
+        if (key === "z") {
+            if (player.isFull) {
+                player.play("kirbInhaling");
+                const shootingStar = k.add([
+                    k.sprite("assets", { anim: "shootingStar" }),
+                    k.area({ shape: new k.Rect(k.vec2(5, 4), 6, 6) }),
+                    k.pos(
+                        player.direction === "left"
+                            ? player.pos.x - 80
+                            : player.pos.x + 80,
+                        player.pos.y + 5
+                    ),
+                    k.scale(scale),
+                    k.move(
+                        player.direction === "left" ? k.LEFT : k.RIGHT,
+                        800
+                    ),
+                    "shootingStar",
+                ]);
+                inhaleEffectRef.opacity = 0;
+                player.isFull = false;
+            } else {
+                player.isInhaling = false;
+                inhaleEffectRef.opacity = 0;
+                player.play("kirbIdle");
+            }
+        }
+    });
 }
