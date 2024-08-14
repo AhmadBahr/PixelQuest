@@ -219,7 +219,7 @@ export function makeInhalable(k: KaboomCtx, enemy: GameObj) {
             "enemy",
         ]);
 
-        makeInhalable(k,flame);
+        makeInhalable(k, flame);
 
         flame.onStateEnter("idle", async () => {
             await k.wait(1);
@@ -239,4 +239,19 @@ export function makeInhalable(k: KaboomCtx, enemy: GameObj) {
     }
 }
 
-
+export function makeGuyEnemy(k: KaboomCtx, posX: number, posY: number) {
+    const guy = k.add([
+        k.sprite("assets", { anim: "guyWalk" }),
+        k.scale(scale),
+        k.pos(posX * scale, posY * scale),
+        k.area({
+            shape: new k.Rect(k.vec2(2, 3.9), 12, 12),
+            collisionIgnore: ["enemy"],
+        }),
+        k.body(),
+        k.state("idle", ["idle", "jump"]),
+        { isInhalable: false },
+        "enemy",
+    ]);
+    makeInhalable(k, guy);
+}
