@@ -201,7 +201,7 @@ export function makeFlameEnemy(k: KaboomCtx, posX: number, posY: number) {
         flame.enterState("jump",async ()=>{
             flame.jump(1000);
         });
-        flame
+        flame.onState
     })
 }
 
