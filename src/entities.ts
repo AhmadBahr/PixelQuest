@@ -1,4 +1,4 @@
-import { AreaComp, BodyComp, DoubleJumpComp, GameObj, HealthComp, KaboomCtx, OpacityComp, PosComp, ScaleComp, SpriteComp } from "kaboom";
+import kaboom, { AreaComp, BodyComp, DoubleJumpComp, GameObj, HealthComp, KaboomCtx, OpacityComp, PosComp, ScaleComp, SpriteComp } from "kaboom";
 import { scale } from "./constants";
 
 type PlayerGameObj = GameObj<
@@ -166,13 +166,34 @@ export function setControls(k: KaboomCtx, player: PlayerGameObj) {
                     ),
                     "shootingStar",
                 ]);
-                inhaleEffectRef.opacity = 0;
+                shootingStar.onCollide("platform", () => {
+                    k.destroy(shootingStar);
+                });
                 player.isFull = false;
-            } else {
-                player.isInhaling = false;
-                inhaleEffectRef.opacity = 0;
-                player.play("kirbIdle");
+                k.wait(1, () => player.play("kirbIdle"));
+                return;
             }
+            inhaleEffectRef.opacity = 0;
+            player.isInhaling = false;
+            player.play("kirbIdle");
         }
     });
+
 }
+
+export function makeFlameEnemy(k: KaboomCtx, posX: number, posY: number) {
+    const flame = k.add([
+        k.sprite("assets", { anim: "flame" }),
+        k.scale(scale),
+        k.pos(posX * scale, posY * scale),
+        k.area({
+            shape: new k.Rect(k.vec2(4, 6), 8, 10),
+            collisionIgnore: ["enemy"],
+        }),
+        k.body(),
+        k.state("idle", ["idle", "jump"]),
+        "enemy",
+    ]);
+    flame.onStateEnter("idle")
+}
+
