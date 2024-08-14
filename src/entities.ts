@@ -178,50 +178,63 @@ export function setControls(k: KaboomCtx, player: PlayerGameObj) {
             player.play("kirbIdle");
         }
     });
-
 }
 
-export function makeInhalable(k: KaboomCtx, enemy:GameObj) {
-    return k.add([
-        k.sprite("assets", { frame: 0 }),
-        k.area({ shape: new k.Rect(k.vec2(0), 16, 16) }),
-        k.body({ isStatic: true }),
-        k.pos(posX * scale, posY * scale),
-        k.scale(scale),
-        "platform",
-    ]);
-}
-
-export function makeFlameEnemy(k: KaboomCtx, posX: number, posY: number) {
-    const flame = k.add([
-        k.sprite("assets", { anim: "flame" }),
-        k.scale(scale),
-        k.pos(posX * scale, posY * scale),
-        k.area({
-            shape: new k.Rect(k.vec2(4, 6), 8, 10),
-            collisionIgnore: ["enemy"],
-        }),
-        k.body(),
-        k.state("idle", ["idle", "jump"]),
-        "enemy",
-    ]);
-
-    flame.onStateEnter("idle", async () => {
-        await k.wait(1);
-        flame.enterState("jump");
+export function makeInhalable(k: KaboomCtx, enemy: GameObj) {
+    enemy.onCollide("inhaleZone", () => {
+        enemy.isInhable = true;
     });
 
-    flame.onStateEnter("jump", () => {
-        flame.jump(1000);
+    enemy.onCollideEnd("inhaleZone", () => {
+        enemy.isInhable = false;
     });
 
-    flame.onStateUpdate("jump", () => {
-        if (flame.isGrounded()) {
-            flame.enterState("idle");
+    enemy.onCollide("shootingStar", (shootingStar: GameObj) => {
+        k.destroy(enemy);
+        k.destroy(shootingStar);
+    });
+
+    const playerRef = k.get("player")[0];
+    enemy.onUpdate(() => {
+        if (playerRef.isInhaling && enemy.isInhable) {
+            if (playerRef.direction === "left") {
+                enemy.move(-800, 0);
+            } else {
+                enemy.move(800, 0);
+            }
         }
     });
 
-    return flame;
-}
+    export function makeFlameEnemy(k: KaboomCtx, posX: number, posY: number) {
+        const flame = k.add([
+            k.sprite("assets", { anim: "flame" }),
+            k.scale(scale),
+            k.pos(posX * scale, posY * scale),
+            k.area({
+                shape: new k.Rect(k.vec2(4, 6), 8, 10),
+                collisionIgnore: ["enemy"],
+            }),
+            k.body(),
+            k.state("idle", ["idle", "jump"]),
+            "enemy",
+        ]);
+
+        flame.onStateEnter("idle", async () => {
+            await k.wait(1);
+            flame.enterState("jump");
+        });
+
+        flame.onStateEnter("jump", () => {
+            flame.jump(1000);
+        });
+
+        flame.onStateUpdate("jump", () => {
+            if (flame.isGrounded()) {
+                flame.enterState("idle");
+            }
+        });
+
+        return flame;
+    }
 
 
