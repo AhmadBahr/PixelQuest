@@ -194,6 +194,14 @@ export function makeFlameEnemy(k: KaboomCtx, posX: number, posY: number) {
         k.state("idle", ["idle", "jump"]),
         "enemy",
     ]);
-    flame.onStateEnter("idle")
+    flame.onStateEnter("idle", async()=>{
+        await k.wait(1, ()=>{
+            flame.play("jump");
+        });
+        flame.enterState("jump",async ()=>{
+            flame.jump(1000);
+        });
+        flame
+    })
 }
 
