@@ -1,6 +1,6 @@
-![game preview](preview.png)
-
 # PixelQuest
+
+![game preview](preview.png)
 
 ## Table of Contents
 1. [**General Info**](#general-info)
@@ -23,6 +23,9 @@ CSS3 is used to style the webpage surrounding the game canvas, ensuring it is re
 # Kaboom.js
 Kaboom.js is a lightweight JavaScript game framework for building 2D games. It provides built-in tools for handling sprite rendering, physics, and input, which simplifies the game development process.
 
+# Vite
+Vite is a fast build tool and development server for modern web projects. It speeds up the development process by providing fast Hot Module Replacement (HMR) and efficient bundling, allowing developers to see changes instantly in the browser.
+
 # HTML5 Canvas
 React is a JavaScript library for building user interfaces. It allows developers to create reusable UI components and manage application state efficiently.
 
@@ -33,11 +36,16 @@ git clone https://github.com/your-username/pixelquest-game.git
 Navigate to the project directory:
 cd pixelquest-game
 
-Install dependencies (if applicable):
+Install dependencies using Vite:
 npm install
 
-Start the game by running:
+Start the development server with Vite:
 npm run dev
+
+Open the game in your browser by navigating to the local server URL displayed by Vite (typically http://localhost:3000).
+
+To build the project for production:
+npm run build
 
 ## Features
 
@@ -57,6 +65,4 @@ Smooth Animations:
 Kaboom.js handles sprite animations for the character, enemies, and objects. Smooth transitions and animated effects enhance the gameplay experience.
 
 # Code & Snippets: 
-
-
-
+      
