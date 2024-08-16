@@ -64,4 +64,4 @@ Smooth Animations:
 Kaboom.js handles sprite animations for the character, enemies, and objects. Smooth transitions and animated effects enhance the gameplay experience.
 
 # Code & Snippets: 
-file:///C:/Users/ATTO/Desktop/Capture4.PNG
+C:\Users\ATTO\Desktop\Capture1.PNG
