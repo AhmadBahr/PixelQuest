@@ -51,17 +51,12 @@ npm run build
 Character Movement:
 Control the player character using the arrow keys for movement and the spacebar to jump. The game uses Kaboom's built-in physics engine to handle gravity and collisions with the environment.
 
-Collectible Items:
-Throughout the levels, players can collect coins and power-ups that enhance their abilities or provide score bonuses.
-
 Enemies:
 There are various enemies placed in levels. If touched, they will deal damage to the player. The player can defeat enemies by jumping on top of them.
-
-Multiple Levels:
-PixelQuest features multiple levels with increasing difficulty. Each level has a distinct layout with its own set of challenges, platforms, and enemies.
 
 Smooth Animations:
 Kaboom.js handles sprite animations for the character, enemies, and objects. Smooth transitions and animated effects enhance the gameplay experience.
 
 # Code & Snippets: 
+![alt text](C:\Users\ATTO\Desktop\Capture.PNG)
 
