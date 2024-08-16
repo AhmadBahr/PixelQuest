@@ -1,17 +1,62 @@
-# Kirby like Platformer Game made with TypeScript + Kaboom.js
-
 ![game preview](preview.png)
 
-Live demo : https://jslegend.itch.io/kirby-like-platformer-asset-pack
+# PixelQuest
 
-Learn how to build this game by following my tutorial : https://www.youtube.com/watch?v=rICeqnbzkZk
+## Table of Contents
+1. [**General Info**](#general-info)
+3. [**Technologies Used**](#Techlogy-used)
+4. [**Setup**](#setup)
+5. [**Features**](#features) 
+6. [**Code & Snippets**](#CodeSnippets)
 
-Everything was made by me including the art which you can use in your games.
+## General Info
+PixelQuest is a 2D platformer game built using TypeScript and Kaboom.js. Inspired by classic platformers, the game features a pixel art world where players must navigate obstacles, collect items, and defeat enemies to reach the goal. The project demonstrates core game development concepts such as sprite animation, physics, and state management in a browser environment.
+
+## Technologies Used:
+
+# TypeScript
+TypeScript is a statically typed superset of JavaScript that adds type annotations. It helps catch errors during development and improves the code quality for large-scale projects like PixelQuest.
+
+# CSS3
+CSS3 is used to style the webpage surrounding the game canvas, ensuring it is responsive and visually appealing. It also handles some of the game’s UI components.
+
+# Kaboom.js
+Kaboom.js is a lightweight JavaScript game framework for building 2D games. It provides built-in tools for handling sprite rendering, physics, and input, which simplifies the game development process.
+
+# HTML5 Canvas
+React is a JavaScript library for building user interfaces. It allows developers to create reusable UI components and manage application state efficiently.
+
+## Setup
+Clone the repository:
+git clone https://github.com/your-username/pixelquest-game.git
+
+Navigate to the project directory:
+cd pixelquest-game
+
+Install dependencies (if applicable):
+npm install
+
+Start the game by running:
+npm run dev
+
+## Features
+
+Character Movement:
+Control the player character using the arrow keys for movement and the spacebar to jump. The game uses Kaboom's built-in physics engine to handle gravity and collisions with the environment.
+
+Collectible Items:
+Throughout the levels, players can collect coins and power-ups that enhance their abilities or provide score bonuses.
+
+Enemies:
+There are various enemies placed in levels. If touched, they will deal damage to the player. The player can defeat enemies by jumping on top of them.
+
+Multiple Levels:
+PixelQuest features multiple levels with increasing difficulty. Each level has a distinct layout with its own set of challenges, platforms, and enemies.
+
+Smooth Animations:
+Kaboom.js handles sprite animations for the character, enemies, and objects. Smooth transitions and animated effects enhance the gameplay experience.
+
+# Code & Snippets: 
 
 
-## How to run the project ?
 
-Assuming you have `node` installed.
-- Install dependencies with `npm install`
-- Run locally with `npm run dev`
-- Build for production with `npm run build` and a dist folder should appear
