@@ -1,62 +1,151 @@
-# PixelQuest
-![game preview](preview.png)
+# PixelQuest - 2D Platformer Game
 
-## Table of Contents
-1. [**General Info**](#general-info)
-3. [**Technologies Used**](#Techlogy-used)
-4. [**Setup**](#setup)
-5. [**Features**](#features) 
-6. [**Code & Snippets**](#CodeSnippets)
+A modern 2D platformer game built with TypeScript and Kaboom.js, featuring pixel art graphics and smooth gameplay mechanics.
 
-## General Info
-PixelQuest is a 2D platformer game built using TypeScript and Kaboom.js. Inspired by classic platformers, the game features a pixel art world where players must navigate obstacles, collect items, and defeat enemies to reach the goal. The project demonstrates core game development concepts such as sprite animation, physics, and state management in a browser environment.
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![Kaboom.js](https://img.shields.io/badge/Kaboom.js-000000?style=for-the-badge&logo=kaboom&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-## Technologies Used:
+![Game Preview](preview.png)
 
-# TypeScript
-TypeScript is a statically typed superset of JavaScript that adds type annotations. It helps catch errors during development and improves the code quality for large-scale projects like PixelQuest.
+## ✨ Features
 
-# CSS3
-CSS3 is used to style the webpage surrounding the game canvas, ensuring it is responsive and visually appealing. It also handles some of the game’s UI components.
+- 🎮 **Smooth Gameplay** - Responsive controls with arrow keys and spacebar
+- 🎨 **Pixel Art Graphics** - Beautiful retro-style visuals with animated sprites
+- 🏃‍♂️ **Character Movement** - Jump, run, and navigate through challenging levels
+- 👾 **Enemy AI** - Various enemies with different behaviors and attack patterns
+- 🗺️ **Multiple Levels** - Explore different environments with unique challenges
+- ⚡ **Physics Engine** - Realistic gravity and collision detection
+- 🎯 **Game State Management** - Seamless level transitions and progress tracking
 
-# Kaboom.js
-Kaboom.js is a lightweight JavaScript game framework for building 2D games. It provides built-in tools for handling sprite rendering, physics, and input, which simplifies the game development process.
+## 🚀 Quick Start
 
-# Vite
-Vite is a fast build tool and development server for modern web projects. It speeds up the development process by providing fast Hot Module Replacement (HMR) and efficient bundling, allowing developers to see changes instantly in the browser.
+### Prerequisites
+- Node.js (v18+)
+- npm or yarn
 
-# HTML5 Canvas
-React is a JavaScript library for building user interfaces. It allows developers to create reusable UI components and manage application state efficiently.
+### Installation & Setup
+```bash
+# Clone the repository
+git clone <repository-url>
+cd PixelQuest
 
-## Setup
-Clone the repository:
-git clone https://github.com/your-username/pixelquest-game.git
-
-Navigate to the project directory:
-cd pixelquest-game
-
-Install dependencies using Vite:
+# Install dependencies
 npm install
 
-Start the development server with Vite:
+# Start development server
 npm run dev
+```
 
-Open the game in your browser by navigating to the local server URL displayed by Vite (typically http://localhost:3000).
+Visit `http://localhost:5173` to play the game.
 
-To build the project for production:
+## 🎮 How to Play
+
+- **Arrow Keys** - Move left/right
+- **Spacebar** - Jump
+- **Avoid enemies** - Don't touch them or you'll take damage
+- **Jump on enemies** - Defeat them by landing on their heads
+- **Reach the goal** - Complete each level to progress
+
+## 🛠️ Tech Stack
+
+**Game Engine:**
+- Kaboom.js - Lightweight 2D game framework
+- TypeScript - Type-safe JavaScript development
+- Vite - Fast build tool and dev server
+
+**Graphics & Assets:**
+- HTML5 Canvas - Game rendering
+- CSS3 - UI styling and responsiveness
+- Pixel art sprites - Retro game aesthetics
+
+## 📁 Project Structure
+
+```
+PixelQuest/
+├── src/
+│   ├── main.ts           # Game entry point
+│   ├── kaboomCtx.ts      # Kaboom.js context
+│   ├── entities.ts       # Game entities (player, enemies)
+│   ├── state.ts          # Game state management
+│   ├── utils.ts          # Utility functions
+│   └── constants.ts      # Game constants
+├── public/
+│   ├── kirby-like.png    # Sprite sheet
+│   ├── level-1.png       # Level 1 background
+│   ├── level-2.png       # Level 2 background
+│   ├── level-1.json      # Level 1 layout data
+│   └── level-2.json      # Level 2 layout data
+├── index.html            # Main HTML file
+└── package.json          # Dependencies and scripts
+```
+
+## 🎯 Game Mechanics
+
+### Player Character
+- **Movement**: Smooth horizontal movement with acceleration
+- **Jumping**: Variable jump height based on key press duration
+- **Health System**: Take damage from enemies, respawn at checkpoints
+- **Animations**: Idle, walking, and special ability animations
+
+### Enemies
+- **Flame Enemies**: Stationary fire hazards
+- **Guy Enemies**: Walking enemies that patrol platforms
+- **Bird Enemies**: Flying enemies with random movement patterns
+
+### Level Design
+- **Tile-based Maps**: Built using sprite sheets and JSON layouts
+- **Spawn Points**: Dynamic enemy and player positioning
+- **Camera System**: Smooth camera following with boundaries
+
+## 🔧 Development
+
+### Building for Production
+```bash
 npm run build
+```
 
-## Features
+### Preview Production Build
+```bash
+npm run preview
+```
 
-Character Movement:
-Control the player character using the arrow keys for movement and the spacebar to jump. The game uses Kaboom's built-in physics engine to handle gravity and collisions with the environment.
+### Development Workflow
+1. Make changes to TypeScript files in `src/`
+2. Vite provides hot module replacement for instant feedback
+3. Test gameplay mechanics and level progression
+4. Build and deploy when ready
 
-Enemies:
-There are various enemies placed in levels. If touched, they will deal damage to the player. The player can defeat enemies by jumping on top of them.
+## 🎨 Customization
 
-Smooth Animations:
-Kaboom.js handles sprite animations for the character, enemies, and objects. Smooth transitions and animated effects enhance the gameplay experience.
+### Adding New Levels
+1. Create level sprite sheet in `public/`
+2. Add level JSON layout file
+3. Update `main.ts` with new scene configuration
+4. Add spawn points and enemy placement
 
-# Code & Snippets: 
+### Modifying Game Mechanics
+- Edit `entities.ts` for player/enemy behavior
+- Update `constants.ts` for game balance
+- Modify `state.ts` for game progression logic
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+**Built with ❤️ using TypeScript and Kaboom.js**
 
 
